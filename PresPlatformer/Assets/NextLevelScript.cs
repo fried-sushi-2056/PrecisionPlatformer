@@ -9,6 +9,6 @@ public class NextLevelScript : MonoBehaviour
 
     void OnTriggerEnter2D()
     {
-        gameManager.LoadManScene();
+        gameManager.LoadNextScene();
     }
 }
