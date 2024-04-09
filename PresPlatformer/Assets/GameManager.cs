@@ -12,6 +12,6 @@ public class GameManager : MonoBehaviour
 
     public void LoadManScene()
     {
-        SceneManager.LoadScene("PlatformScene");
+        SceneManager.LoadScene("man scene");
     }
 }
