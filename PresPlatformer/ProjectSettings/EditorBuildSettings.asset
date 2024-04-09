@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 2.unity
     guid: 16a14e857ffab8948904c9b7a026e49f
   - enabled: 1
+    path: Assets/Scenes/Win Screen.unity
+    guid: f709ff186b4b84f40925eac2e564baea
+  - enabled: 1
     path: Assets/Scenes/Level Selector.unity
     guid: f577c7cfafed7d8489c9fc94b04c8f5f
   - enabled: 1
