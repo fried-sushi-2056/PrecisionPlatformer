@@ -8,16 +8,18 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] private float speed = 8f;
     [SerializeField] private float jumpingPower = 16f;
     [SerializeField] private bool isFacingRight = true;
+    [SerializeField] private bool onGround;
 
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+
+    
 
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (Input.GetButtonDown("Jump") && onGround)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
@@ -35,9 +37,14 @@ public class PlayerMovementScript : MonoBehaviour
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 
-    private bool IsGrounded()
+    public void touchGround()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        onGround = true;
+    }
+    
+    public void leaveGround()
+    {
+        onGround=false;
     }
 
     private void Flip()
