@@ -159,8 +159,13 @@ MonoBehaviour:
   speed: 8
   jumpingPower: 16
   isFacingRight: 1
+<<<<<<< Updated upstream
   rb: {fileID: 148829160}
   groundCheck: {fileID: 651377199}
+=======
+  onGround: 0
+  rb: {fileID: 148829160}
+>>>>>>> Stashed changes
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
