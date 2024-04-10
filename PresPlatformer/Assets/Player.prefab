@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 6910059700597923210}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -471,6 +471,9 @@ MonoBehaviour:
   jumpingPower: 20
   isFacingRight: 1
   onGround: 0
+  currentGroundSpeedX: 0
+  currentGroundSpeedY: 0
+  currentWallFriction: 0
   rb: {fileID: 6597442903674735924}
   groundLayer:
     serializedVersion: 2
