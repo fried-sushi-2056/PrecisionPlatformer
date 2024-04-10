@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovementScript : MonoBehaviour
 {
     private bool isWallSliding;
-    private float wallSlidingSpeed = 2f;
+    //private float wallSlidingSpeed = 2f;
     public float checkpointX = 0;
     public float checkpointY = 5;
 
