@@ -466,12 +466,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a54d5d107ccf9854dacfd7aee336a9ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkpointX: 0
+  checkpointY: 5
   horizontal: 0
   speed: 8
   jumpingPower: 20
+  walljumpPower: 10
   isFacingRight: 1
   onGround: 0
+  currentGroundSpeedX: 0
+  currentGroundSpeedY: 0
+  currentWallFriction: 0
   rb: {fileID: 6597442903674735924}
+  tf: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -480,6 +487,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   onWall: 0
+  wallDirection: 
+  leftWall: {fileID: 5699789107148813015}
+  rightWall: {fileID: 6022047055310664283}
 --- !u!1 &8986195573694880144
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,3 +635,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 6027289059517796648}
   parent: {fileID: 5278060587394546362}
+  onGround: 0
+  currentFloorCollider: {fileID: 0}

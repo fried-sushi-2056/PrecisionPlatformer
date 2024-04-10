@@ -12,6 +12,7 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] private float horizontal;
     [SerializeField] private float speed = 8f;
     [SerializeField] private float jumpingPower = 16f;
+    [SerializeField] private float walljumpPower;
     [SerializeField] private bool isFacingRight = true;
     [SerializeField] private bool onGround;
 
@@ -26,15 +27,25 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] private Transform wallCheck;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private bool onWall;
+    [SerializeField] private string wallDirection;
+
+    private float wallJumpSpeed = 0;
+    private bool canSlowWall = true;
+
+    [SerializeField] private WallCheckScript leftWall;
+    [SerializeField] private WallCheckScript rightWall;
 
 
-
+    private void Start()
+    {
+        walljumpPower = 2.25f * speed;
+    }
 
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && onGround)
+        if (Input.GetButtonDown("Jump") && (onGround || onWall))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
@@ -44,19 +55,67 @@ public class PlayerMovementScript : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
+        if (Input.GetButtonDown("Jump") && onWall)
+        {
+            if(wallDirection == "Left")
+            {
+                wallJumpSpeed = walljumpPower;
+            }
+
+            if(wallDirection == "Right")
+            {
+                wallJumpSpeed = -walljumpPower;
+            }
+        }
+
+        if(wallJumpSpeed != 0f && canSlowWall)
+        {
+            StartCoroutine(SlowWallSpeed());
+        }
+        
+        
         Flip();
         //WallSlide();
+    }
+    IEnumerator SlowWallSpeed()
+    {
+        canSlowWall = false;
+        if(wallJumpSpeed < 1f)
+        {
+            wallJumpSpeed = 0f;
+            yield return new WaitForSeconds(.1f);
+            canSlowWall = true;
+        }
+        if (wallJumpSpeed > 1f)
+        {
+            wallJumpSpeed = 0f;
+            yield return new WaitForSeconds(.1f);
+            canSlowWall = true;
+        }
+        if (wallJumpSpeed > 0f)
+        {
+            wallJumpSpeed += -1f;
+            yield return new WaitForSeconds(.1f);
+            canSlowWall = true;
+        }
+        if (wallJumpSpeed < 0f)
+        {
+            wallJumpSpeed += 1f;
+            yield return new WaitForSeconds(.1f);
+            canSlowWall = true;
+        }
+
     }
 
     private void FixedUpdate()
     {
         if (onWall && rb.velocity.y < 0)
         {
-            rb.velocity = new Vector2(horizontal * speed + currentGroundSpeedX, (rb.velocity.y + currentGroundSpeedY)* currentWallFriction);
+            rb.velocity = new Vector2(horizontal * speed + currentGroundSpeedX + wallJumpSpeed, (rb.velocity.y + currentGroundSpeedY)* currentWallFriction);
         }
         else
         {
-            rb.velocity = new Vector2(horizontal * speed + currentGroundSpeedX, rb.velocity.y);
+            rb.velocity = new Vector2(horizontal * speed + currentGroundSpeedX + wallJumpSpeed, rb.velocity.y);
         }
     }
 
@@ -73,16 +132,26 @@ public class PlayerMovementScript : MonoBehaviour
     }
 
 
-    public void touchWall(float friction)
+    public void touchWall(float friction, bool isLeft)
     {
+        currentGroundSpeedX = 0;
         currentWallFriction = friction;
         onWall = true;
+        if(isLeft)
+        {
+            wallDirection = "Left";
+        }
+        if(!isLeft)
+        {
+            wallDirection = "Right";
+        }
     }
 
     public void leaveWall()
     {
         currentWallFriction = 1;
         onWall = false;
+        wallDirection = "None";
     }
 
     private void Flip()
@@ -93,6 +162,8 @@ public class PlayerMovementScript : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
+            leftWall.Flip();
+            rightWall.Flip();
         }
     }
 
