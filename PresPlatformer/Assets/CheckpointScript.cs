@@ -9,6 +9,7 @@ public class CheckpointScript : MonoBehaviour
     private float xPos;
     private float yPos;
     public GameObject glowPrefab;
+    private bool canGlow = true;
 
     void Start()
     {
@@ -18,8 +19,11 @@ public class CheckpointScript : MonoBehaviour
     
     public void OnTriggerEnter2D()
     {
-        player.Checkpoint(xPos, yPos);
-        Glow();
+        if(canGlow){
+            player.Checkpoint(xPos, yPos);
+            Glow();
+            canGlow = false;
+        }
     }
 
     public void Glow(){
