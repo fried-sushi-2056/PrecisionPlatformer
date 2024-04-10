@@ -5,13 +5,16 @@ using UnityEngine;
 public class PlayerMovementScript : MonoBehaviour
 {
     private bool isWallSliding;
-    private float wallSlidingSpeed = 2f;
 
     [SerializeField] private float horizontal;
     [SerializeField] private float speed = 8f;
     [SerializeField] private float jumpingPower = 16f;
     [SerializeField] private bool isFacingRight = true;
     [SerializeField] private bool onGround;
+
+    [SerializeField] public float currentGroundSpeedX;
+    [SerializeField] public float currentGroundSpeedY;
+    [SerializeField] public float currentWallFriction;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private LayerMask groundLayer;
@@ -43,7 +46,14 @@ public class PlayerMovementScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        if (onWall && rb.velocity.y < 0)
+        {
+            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y * currentWallFriction);
+        }
+        else
+        {
+            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        }
     }
 
     public void touchGround()
@@ -57,13 +67,15 @@ public class PlayerMovementScript : MonoBehaviour
     }
 
 
-    public void touchWall()
+    public void touchWall(float friction)
     {
+        currentWallFriction = friction;
         onWall = true;
     }
 
     public void leaveWall()
     {
+        currentWallFriction = 1;
         onWall = false;
     }
 
@@ -79,12 +91,13 @@ public class PlayerMovementScript : MonoBehaviour
     }
 
 
-
+    /*
     //Check if player is in contact with wall
     private bool IsWalled(){
         return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
     }
 
+    
     private void WallSlide(){
         if(onWall && !onGround && horizontal != 0f){
             isWallSliding = true;
@@ -94,5 +107,6 @@ public class PlayerMovementScript : MonoBehaviour
             isWallSliding = false;
         }
     }
+    */
 
 }
