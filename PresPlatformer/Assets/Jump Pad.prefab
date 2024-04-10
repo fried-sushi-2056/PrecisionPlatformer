@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 5044597410225698709}
   - component: {fileID: 7507126157974492445}
   - component: {fileID: -1886004062997545766}
-  - component: {fileID: -5549968137331534663}
   - component: {fileID: -1052497368766394849}
+  - component: {fileID: 7657948570573211083}
   m_Layer: 0
-  m_Name: Moving Platform
-  m_TagString: Ground
+  m_Name: Jump Pad
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.6255318, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -95,7 +95,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7526793677743179864}
-  m_BodyType: 1
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -113,24 +113,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!114 &-5549968137331534663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7526793677743179864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15072e5799cec4d4cb3ef387ba7d6d70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  platformSpeedX: 2
-  platformSpeedY: 2
-  leftBound: 0
-  rightBound: 0
-  rb: {fileID: -1886004062997545766}
+  m_Constraints: 0
 --- !u!61 &-1052497368766394849
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -176,3 +159,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &7657948570573211083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7526793677743179864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f00d60f9af38410fb32f0639246e151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

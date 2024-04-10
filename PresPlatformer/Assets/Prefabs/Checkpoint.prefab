@@ -143,3 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5312f3cc9cf16204e9745fbb362b4aa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkpoint: {fileID: 0}
+  player: {fileID: 0}
+  glowPrefab: {fileID: 8990201568152855458, guid: 53eefdc93b72b1346b5773e35cf39c9a, type: 3}
