@@ -4,20 +4,29 @@ using UnityEngine;
 
 public class PlayerMovementScript : MonoBehaviour
 {
-    private bool isWallSliding;
-    //private float wallSlidingSpeed = 2f;
+
     public float checkpointX = 0;
     public float checkpointY = 5;
 
+
+    [SerializeField] public bool usingControler = false;
+
+
     [SerializeField] private float horizontal;
-    [SerializeField] private float speed = 8f;
-    [SerializeField] private float jumpingPower = 16f;
-    [SerializeField] private float walljumpPower;
+    [SerializeField] private float speed = 0.3f;
+    [SerializeField] private float jumpingPower = 20f;
+    [SerializeField] private float walljumpPower = 20f;
     [SerializeField] private bool isFacingRight = true;
     [SerializeField] private bool onGround;
+    [SerializeField] private float airSlow = 0.1f;
+    [SerializeField] private float capLeftRight = 9;
+
+    [SerializeField] private float deadzone = 0.2f;
 
     [SerializeField] public float currentGroundSpeedX;
     [SerializeField] public float currentGroundSpeedY;
+    [SerializeField] public float currentGroundFriction = 0;
+
     [SerializeField] public float currentWallFriction;
 
     [SerializeField] private Rigidbody2D rb;
@@ -35,15 +44,67 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] private WallCheckScript leftWall;
     [SerializeField] private WallCheckScript rightWall;
 
+    private bool canRight = true;
+    private bool canLeft = true;
+    private bool canFriction = true;
+    private bool canWallJump = true;
 
-    private void Start()
-    {
-        walljumpPower = 2.25f * speed;
-    }
+    private bool rightDirectionPressed = false;
+    private bool leftDirectionPressed = false;
+
+
 
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
+
+
+
+        if ((rightDirectionPressed && horizontal < capLeftRight) && canRight && !leftDirectionPressed)
+        {
+            StartCoroutine(SpeedChange(speed, canRight, 1));
+        }
+        if ((leftDirectionPressed && horizontal > -1 * capLeftRight) && canLeft && !rightDirectionPressed)
+        {
+            StartCoroutine(SpeedChange(-1*speed, canLeft, 1));
+        }
+
+        if ((horizontal > 0 && onGround && canFriction && (!rightDirectionPressed || (leftDirectionPressed && rightDirectionPressed))) || horizontal > capLeftRight)
+        {
+            StartCoroutine(SpeedChange(-1*currentGroundFriction, canFriction,1));
+        }
+
+        if ((horizontal < 0 && onGround && canFriction && (!leftDirectionPressed || (leftDirectionPressed && rightDirectionPressed))) || horizontal < -1*capLeftRight)
+        {
+            StartCoroutine(SpeedChange(currentGroundFriction, canFriction,1));
+        }
+
+        if (horizontal > 0 && !onGround && canFriction)
+        {
+            StartCoroutine(SpeedChange(-1*airSlow, canFriction, 1));
+        }
+
+        if (horizontal < 0 && !onGround && canFriction)
+        {
+            StartCoroutine(SpeedChange(airSlow, canFriction, 1));
+        }
+
+        if (Input.GetKeyDown("d") || Input.GetKeyDown("right") || (Input.GetAxis("Horizontal") > deadzone && usingControler))
+        {
+            rightDirectionPressed = true;
+        }
+        if (Input.GetKeyUp("d") || Input.GetKeyUp("right") || (Input.GetAxis("Horizontal")! > deadzone && usingControler))
+        {
+            rightDirectionPressed = false;
+        }
+
+        if (Input.GetKeyDown("a") || Input.GetKeyDown("left") || (Input.GetAxis("Horizontal") < -1 * deadzone && usingControler))
+        {
+            leftDirectionPressed = true;
+        }
+        if (Input.GetKeyUp("a") || Input.GetKeyUp("left") || (Input.GetAxis("Horizontal")! < -1 * deadzone && usingControler))
+        {
+            leftDirectionPressed = false;
+        }
 
         if (Input.GetButtonDown("Jump") && (onGround || onWall))
         {
@@ -55,16 +116,16 @@ public class PlayerMovementScript : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
-        if (Input.GetButtonDown("Jump") && onWall)
+        if (Input.GetButtonDown("Jump") && onWall && !onGround)
         {
             if(wallDirection == "Left")
             {
-                wallJumpSpeed = walljumpPower;
+                StartCoroutine(InstantSpeedChange(walljumpPower, canWallJump, 10));
             }
 
             if(wallDirection == "Right")
             {
-                wallJumpSpeed = -walljumpPower;
+                StartCoroutine(InstantSpeedChange(-walljumpPower, canWallJump, 10));
             }
         }
 
@@ -72,11 +133,48 @@ public class PlayerMovementScript : MonoBehaviour
         {
             StartCoroutine(SlowWallSpeed());
         }
-        
-        
+
+
         Flip();
         //WallSlide();
     }
+
+
+    public void SetFloorFriction(float friction)
+    {
+        currentGroundFriction = friction;
+    }
+
+    IEnumerator SpeedChange(float rightSpeed, bool cooldown, int frameDelay)
+    {
+        cooldown = false;
+        if ((horizontal == 0) || (Mathf.Sign(horizontal) == Mathf.Sign(horizontal + rightSpeed)))
+        {
+            horizontal += rightSpeed;
+        }
+        else
+        {
+            horizontal = 0f;
+        }
+        for (int i = 0; i < frameDelay; i++)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        cooldown = true;
+    }
+    IEnumerator InstantSpeedChange(float rightSpeed, bool cooldown, int frameDelay)
+    {
+        cooldown = false;
+
+        horizontal = rightSpeed;
+
+        for (int i = 0; i < frameDelay; i++)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        cooldown = true;
+    }
+
     IEnumerator SlowWallSpeed()
     {
         canSlowWall = false;
@@ -109,13 +207,15 @@ public class PlayerMovementScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+
         if (onWall && rb.velocity.y < 0)
         {
-            rb.velocity = new Vector2(horizontal * speed + currentGroundSpeedX + wallJumpSpeed, (rb.velocity.y + currentGroundSpeedY)* currentWallFriction);
+            rb.velocity = new Vector2(horizontal + currentGroundSpeedX, (rb.velocity.y + currentGroundSpeedY)* currentWallFriction);
         }
         else
         {
-            rb.velocity = new Vector2(horizontal * speed + currentGroundSpeedX + wallJumpSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(horizontal + currentGroundSpeedX, rb.velocity.y);
         }
     }
 
@@ -129,6 +229,7 @@ public class PlayerMovementScript : MonoBehaviour
     public void leaveGround()
     {
         onGround = false;
+        currentGroundFriction = 0f;
     }
 
 
@@ -184,7 +285,7 @@ public class PlayerMovementScript : MonoBehaviour
         return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
     }
 
-    
+
     private void WallSlide(){
         if(onWall && !onGround && horizontal != 0f){
             isWallSliding = true;

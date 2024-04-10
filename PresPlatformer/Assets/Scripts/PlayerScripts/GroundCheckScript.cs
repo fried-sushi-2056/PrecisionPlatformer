@@ -25,6 +25,7 @@ public class GroundCheckScript : MonoBehaviour
     
     void UpdatePlatformVelocity(Collider2D currentFloor)
     {
+        parent.GetComponent<PlayerMovementScript>().SetFloorFriction(currentFloor.gameObject.GetComponent<Rigidbody2D>().sharedMaterial.friction);
         parent.GetComponent<PlayerMovementScript>().touchGround(((Vector2)currentFloor.gameObject.GetComponent<Rigidbody2D>().velocity).x, ((Vector2)currentFloor.gameObject.GetComponent<Rigidbody2D>().velocity).y);
     }
 

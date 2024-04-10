@@ -397,7 +397,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 5
+  m_GravityScale: 6
   m_Material: {fileID: 6200000, guid: 0b15fe1af2874c84c825e2fec0d66df5, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -468,14 +468,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkpointX: 0
   checkpointY: 5
+  usingControler: 0
   horizontal: 0
-  speed: 8
+  speed: 0.3
   jumpingPower: 20
-  walljumpPower: 10
+  walljumpPower: 20
   isFacingRight: 1
   onGround: 0
+  airSlow: 0.1
+  capLeftRight: 9
+  deadzone: 0.2
   currentGroundSpeedX: 0
   currentGroundSpeedY: 0
+  currentGroundFriction: 0
   currentWallFriction: 0
   rb: {fileID: 6597442903674735924}
   tf: {fileID: 0}
