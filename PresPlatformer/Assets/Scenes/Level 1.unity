@@ -559,6 +559,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1507327134}
+    - target: {fileID: -176114111519599561, guid: c4badfac2d329934cb20c6cfbd931ac3, type: 3}
+      propertyPath: checkpoint
+      value: 
+      objectReference: {fileID: 1361266900}
     - target: {fileID: 4591565990487388729, guid: c4badfac2d329934cb20c6cfbd931ac3, type: 3}
       propertyPath: m_Name
       value: Checkpoint
@@ -573,7 +577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7932035032007774650, guid: c4badfac2d329934cb20c6cfbd931ac3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.719
+      value: 13.75
       objectReference: {fileID: 0}
     - target: {fileID: 7932035032007774650, guid: c4badfac2d329934cb20c6cfbd931ac3, type: 3}
       propertyPath: m_LocalPosition.z
