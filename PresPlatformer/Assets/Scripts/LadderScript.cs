@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LadderScript : MonoBehaviour
@@ -7,8 +9,8 @@ public class LadderScript : MonoBehaviour
     private bool isLadder;
     private bool isClimbing;
 
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Collider2D ladCol;
+    [SerializeField] private Rigidbody2D playerRb;
+    //[SerializeField] private Collider2D playerLadCol;
 
     void Update()
     {
@@ -25,12 +27,12 @@ public class LadderScript : MonoBehaviour
     {
         if (isClimbing)
         {
-            rb.gravityScale = 0f;
-            rb.velocity = new Vector2(rb.velocity.x, vertical * speed);
+            playerRb.gravityScale = 0f;
+            playerRb.velocity = new Vector2(playerRb.velocity.x, vertical * speed);
         }
         else
         {
-            rb.gravityScale = 4f;
+            playerRb.gravityScale = 4f;
         }
     }
 
