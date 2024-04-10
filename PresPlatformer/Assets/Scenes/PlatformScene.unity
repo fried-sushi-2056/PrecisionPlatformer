@@ -1394,7 +1394,7 @@ GameObject:
   - component: {fileID: 1648020037}
   m_Layer: 0
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1473,15 +1473,39 @@ Tilemap:
   m_Enabled: 1
   m_Tiles: {}
   m_AnimatedTiles: {}
-  m_TileAssetArray: []
-  m_TileSpriteArray: []
-  m_TileMatrixArray: []
-  m_TileColorArray: []
+  m_TileAssetArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  m_TileSpriteArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  m_TileMatrixArray:
+  - m_RefCount: 0
+    m_Data:
+      e00: 7.0684684e+28
+      e01: 0
+      e02: -1.6602098e+20
+      e03: -1.6602098e+20
+      e10: 2.7900757e+20
+      e11: 0
+      e12: 5.55e-43
+      e13: 5.55e-43
+      e20: 11911792
+      e21: -189266180
+      e22: 3.7007916e-19
+      e23: -3.816111e+19
+      e30: 4.5904e-41
+      e31: 5.58e-43
+      e32: 5.56e-43
+      e33: 5.58e-43
+  m_TileColorArray:
+  - m_RefCount: 0
+    m_Data: {r: 3.5318e-41, g: 3.5318e-41, b: 3.5318e-41, a: 3.5318e-41}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 0, y: 0, z: 1}
+  m_Size: {x: 4, y: 6, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:

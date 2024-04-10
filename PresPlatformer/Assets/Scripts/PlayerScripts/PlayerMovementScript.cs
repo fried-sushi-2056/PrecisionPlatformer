@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerMovementScript : MonoBehaviour
 {
     private bool isWallSliding;
+    private float wallSlidingSpeed = 2f;
+    public float checkpointX = 0;
+    public float checkpointY = 5;
 
     [SerializeField] private float horizontal;
     [SerializeField] private float speed = 8f;
@@ -17,6 +20,7 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] public float currentWallFriction;
 
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Transform tf;
     [SerializeField] private LayerMask groundLayer;
 
     [SerializeField] private Transform wallCheck;
@@ -48,17 +52,19 @@ public class PlayerMovementScript : MonoBehaviour
     {
         if (onWall && rb.velocity.y < 0)
         {
-            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y * currentWallFriction);
+            rb.velocity = new Vector2(horizontal * speed + currentGroundSpeedX, (rb.velocity.y + currentGroundSpeedY)* currentWallFriction);
         }
         else
         {
-            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+            rb.velocity = new Vector2(horizontal * speed + currentGroundSpeedX, rb.velocity.y);
         }
     }
 
-    public void touchGround()
+    public void touchGround(float x, float y)
     {
         onGround = true;
+        currentGroundSpeedX = x;
+        currentGroundSpeedY = y;
     }
 
     public void leaveGround()
@@ -90,6 +96,17 @@ public class PlayerMovementScript : MonoBehaviour
         }
     }
 
+    public void Checkpoint(float x, float y)
+    {
+        checkpointX = x;
+        checkpointY = y;
+    }
+
+    public void ReloadCheckpoint()
+    {
+        tf.position = new Vector2(checkpointX,checkpointY);
+        //tf.position.y = checkpointY;
+    }
 
     /*
     //Check if player is in contact with wall

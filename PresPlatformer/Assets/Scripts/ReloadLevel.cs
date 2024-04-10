@@ -5,9 +5,10 @@ using UnityEngine;
 public class ReloadLevel : MonoBehaviour
 {
     public GameManager gm;
+    public PlayerMovementScript player;
 
     void OnTriggerEnter2D()
     {
-        gm.ReloadLevel();
+        player.ReloadCheckpoint();
     }
 }
