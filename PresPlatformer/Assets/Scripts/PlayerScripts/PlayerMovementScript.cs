@@ -52,17 +52,19 @@ public class PlayerMovementScript : MonoBehaviour
     {
         if (onWall && rb.velocity.y < 0)
         {
-            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y * currentWallFriction);
+            rb.velocity = new Vector2(horizontal * speed + currentGroundSpeedX, (rb.velocity.y + currentGroundSpeedY)* currentWallFriction);
         }
         else
         {
-            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+            rb.velocity = new Vector2(horizontal * speed + currentGroundSpeedX, rb.velocity.y);
         }
     }
 
-    public void touchGround()
+    public void touchGround(float x, float y)
     {
         onGround = true;
+        currentGroundSpeedX = x;
+        currentGroundSpeedY = y;
     }
 
     public void leaveGround()
