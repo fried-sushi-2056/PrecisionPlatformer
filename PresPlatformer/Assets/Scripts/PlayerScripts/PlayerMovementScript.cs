@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovementScript : MonoBehaviour
 {
     private bool isWallSliding;
-    private float wallSlidingSpeed = 2f;
+    //private float wallSlidingSpeed = 2f;
     public float checkpointX = 0;
     public float checkpointY = 5;
 
@@ -20,7 +20,7 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] public float currentWallFriction;
 
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform tf;
+    [SerializeField] private Transform playerTransform;
     [SerializeField] private LayerMask groundLayer;
 
     [SerializeField] private Transform wallCheck;
@@ -104,8 +104,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     public void ReloadCheckpoint()
     {
-        tf.position = new Vector2(checkpointX,checkpointY);
-        //tf.position.y = checkpointY;
+        playerTransform.position = new Vector2(checkpointX,checkpointY);
     }
 
     /*

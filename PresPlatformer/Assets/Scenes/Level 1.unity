@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1886004062997545766, guid: e0cd9687504cdd349a496b80508fd410, type: 3}
       propertyPath: m_Constraints
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5044597410225698709, guid: e0cd9687504cdd349a496b80508fd410, type: 3}
       propertyPath: m_LocalPosition.x
@@ -559,6 +559,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1507327134}
+    - target: {fileID: -176114111519599561, guid: c4badfac2d329934cb20c6cfbd931ac3, type: 3}
+      propertyPath: checkpoint
+      value: 
+      objectReference: {fileID: 1361266900}
     - target: {fileID: 4591565990487388729, guid: c4badfac2d329934cb20c6cfbd931ac3, type: 3}
       propertyPath: m_Name
       value: Checkpoint
@@ -573,7 +577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7932035032007774650, guid: c4badfac2d329934cb20c6cfbd931ac3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.719
+      value: 13.75
       objectReference: {fileID: 0}
     - target: {fileID: 7932035032007774650, guid: c4badfac2d329934cb20c6cfbd931ac3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -825,6 +829,10 @@ PrefabInstance:
       propertyPath: checkpointY
       value: 2.7
       objectReference: {fileID: 0}
+    - target: {fileID: 6910059700597923210, guid: 2e6c48de0f6dbbc42859541586a6a1cc, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 1507327133}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
