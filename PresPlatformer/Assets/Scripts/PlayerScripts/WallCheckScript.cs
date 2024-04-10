@@ -6,6 +6,7 @@ public class WallCheckScript : MonoBehaviour
 {
     [SerializeField] private Collider2D wallCheck;
     [SerializeField] private GameObject parent;
+    [SerializeField] private bool leftWall;
 
     // Update is called once per frame
     void OnTriggerEnter2D(Collider2D wallCheck)
@@ -13,9 +14,7 @@ public class WallCheckScript : MonoBehaviour
         // check if collider has 'Ground' tag
         if (wallCheck.CompareTag("Wall"))
         {
-            parent.GetComponent<PlayerMovementScript>().touchWall();
-
-            print("wall touched");
+            parent.GetComponent<PlayerMovementScript>().touchWall(wallCheck.gameObject.GetComponent<WallFriction>().GetFriction());
         }
     }
 
