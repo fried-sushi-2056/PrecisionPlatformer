@@ -190,8 +190,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1886004062997545766, guid: e0cd9687504cdd349a496b80508fd410, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1886004062997545766, guid: e0cd9687504cdd349a496b80508fd410, type: 3}
       propertyPath: m_Constraints
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -1886004062997545766, guid: e0cd9687504cdd349a496b80508fd410, type: 3}
       propertyPath: m_Interpolate
