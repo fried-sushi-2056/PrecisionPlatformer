@@ -6,6 +6,8 @@ public class PlayerMovementScript : MonoBehaviour
 {
     private bool isWallSliding;
     private float wallSlidingSpeed = 2f;
+    private float checkpointX;
+    private float checkpointY;
 
     [SerializeField] private float horizontal;
     [SerializeField] private float speed = 8f;
@@ -14,6 +16,7 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] private bool onGround;
 
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Transform tf;
     [SerializeField] private LayerMask groundLayer;
 
     [SerializeField] private Transform wallCheck;
@@ -78,7 +81,17 @@ public class PlayerMovementScript : MonoBehaviour
         }
     }
 
+    public void Checkpoint(float x, float y)
+    {
+        checkpointX = x;
+        checkpointY = y;
+    }
 
+    public void ReloadCheckpoint()
+    {
+        tf.position = new Vector2(checkpointX,checkpointY);
+        //tf.position.y = checkpointY;
+    }
 
     //Check if player is in contact with wall
     private bool IsWalled(){
