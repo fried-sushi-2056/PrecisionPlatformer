@@ -143,6 +143,10 @@ PrefabInstance:
       propertyPath: platformSpeedY
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1886004062997545766, guid: e0cd9687504cdd349a496b80508fd410, type: 3}
+      propertyPath: m_Constraints
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5044597410225698709, guid: e0cd9687504cdd349a496b80508fd410, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.01
@@ -771,7 +775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2327236809472615754, guid: 2e6c48de0f6dbbc42859541586a6a1cc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.81
+      value: 2.72
       objectReference: {fileID: 0}
     - target: {fileID: 2327236809472615754, guid: 2e6c48de0f6dbbc42859541586a6a1cc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -817,6 +821,10 @@ PrefabInstance:
       propertyPath: wallCheck
       value: 
       objectReference: {fileID: 1104313185}
+    - target: {fileID: 6910059700597923210, guid: 2e6c48de0f6dbbc42859541586a6a1cc, type: 3}
+      propertyPath: checkpointY
+      value: 2.7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -6,8 +6,8 @@ public class PlayerMovementScript : MonoBehaviour
 {
     private bool isWallSliding;
     private float wallSlidingSpeed = 2f;
-    private float checkpointX;
-    private float checkpointY;
+    public float checkpointX = 0;
+    public float checkpointY = 5;
 
     [SerializeField] private float horizontal;
     [SerializeField] private float speed = 8f;
