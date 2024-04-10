@@ -6,6 +6,10 @@ public class PlayerMovementScript : MonoBehaviour
 {
     private bool isWallSliding;
 
+    private float vertical;
+    private float ladderSpeed = 8f;
+
+
     [SerializeField] private float horizontal;
     [SerializeField] private float speed = 8f;
     [SerializeField] private float jumpingPower = 16f;
@@ -22,6 +26,10 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] private Transform wallCheck;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private bool onWall;
+
+    [SerializeField] private bool onLadder;
+    [SerializeField] private bool isClimbing;
+    
 
 
 
@@ -40,6 +48,28 @@ public class PlayerMovementScript : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
+<<<<<<< Updated upstream
+=======
+        if (Input.GetButtonDown("Jump") && onWall)
+        {
+            if(wallDirection == "Left")
+            {
+                wallJumpSpeed = walljumpPower;
+            }
+
+            if(wallDirection == "Right")
+            {
+                wallJumpSpeed = -walljumpPower;
+            }
+        }
+
+        if(wallJumpSpeed != 0f && canSlowWall)
+        {
+            StartCoroutine(SlowWallSpeed());
+        }
+
+
+>>>>>>> Stashed changes
         Flip();
         //WallSlide();
     }
@@ -54,6 +84,22 @@ public class PlayerMovementScript : MonoBehaviour
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
+
+
+        //Adds velocity upwards when the player is on Ladder
+        
+        if(isClimbing){
+            rb.gravityScale = 0f;
+            rb.velocity = new Vector2(rb.velocity.x, vertical*ladderSpeed);
+            print("walling");
+        }
+        else{
+            rb.gravityScale = 4f;
+            print("notwalling");
+        }
+
+        
+
     }
 
     public void touchGround()
@@ -109,4 +155,26 @@ public class PlayerMovementScript : MonoBehaviour
     }
     */
 
+
+//Checks if player is on/off the ladder
+public void TouchLadder(){
+    onLadder = true;
 }
+
+public void OffLadder(){
+    onLadder = false;
+}
+
+//Checks if the player is Climbing a ladder
+public void CurClimbing(){
+    isClimbing = true;
+}
+
+public void NotClimbing(){
+    isClimbing = false;
+}
+
+
+}
+
+
