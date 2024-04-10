@@ -14,7 +14,7 @@ public class WallCheckScript : MonoBehaviour
         // check if collider has 'Ground' tag
         if (wallCheck.CompareTag("Wall"))
         {
-            parent.GetComponent<PlayerMovementScript>().touchWall(wallCheck.gameObject.GetComponent<WallFriction>().GetFriction());
+            parent.GetComponent<PlayerMovementScript>().touchWall(wallCheck.gameObject.GetComponent<WallFriction>().GetFriction(), leftWall);
         }
     }
 
@@ -27,5 +27,10 @@ public class WallCheckScript : MonoBehaviour
         {
             parent.GetComponent<PlayerMovementScript>().leaveWall();
         }
+    }
+
+    public void Flip()
+    {
+        leftWall = !leftWall;
     }
 }
