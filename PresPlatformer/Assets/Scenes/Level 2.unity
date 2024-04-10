@@ -193,6 +193,14 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: -1886004062997545766, guid: e0cd9687504cdd349a496b80508fd410, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1886004062997545766, guid: e0cd9687504cdd349a496b80508fd410, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5044597410225698709, guid: e0cd9687504cdd349a496b80508fd410, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12
@@ -1013,6 +1021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 749408430}
+  player: {fileID: 0}
 --- !u!61 &598124676
 BoxCollider2D:
   m_ObjectHideFlags: 0
