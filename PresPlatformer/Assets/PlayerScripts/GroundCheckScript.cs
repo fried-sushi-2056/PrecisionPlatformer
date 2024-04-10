@@ -17,6 +17,7 @@ public class GroundCheckScript : MonoBehaviour
         }
     }
 
+
     // detection of ground collider
     void OnTriggerExit2D(Collider2D groundCheck)
     {
@@ -26,4 +27,4 @@ public class GroundCheckScript : MonoBehaviour
             parent.GetComponent<PlayerMovementScript>().leaveGround();
         }
     }
-}  
+}

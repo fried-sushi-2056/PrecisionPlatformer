@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMovementScript : MonoBehaviour
 {
+    private bool isWallSliding;
+    private float wallSlidingSpeed = 2f;
+
     [SerializeField] private float horizontal;
     [SerializeField] private float speed = 8f;
     [SerializeField] private float jumpingPower = 16f;
@@ -13,7 +16,12 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private LayerMask groundLayer;
 
-    
+    [SerializeField] private Transform wallCheck;
+    [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private bool onWall;
+
+
+
 
     void Update()
     {
@@ -30,6 +38,7 @@ public class PlayerMovementScript : MonoBehaviour
         }
 
         Flip();
+        //WallSlide();
     }
 
     private void FixedUpdate()
@@ -41,10 +50,21 @@ public class PlayerMovementScript : MonoBehaviour
     {
         onGround = true;
     }
-    
+
     public void leaveGround()
     {
-        onGround=false;
+        onGround = false;
+    }
+
+
+    public void touchWall()
+    {
+        onWall = true;
+    }
+
+    public void leaveWall()
+    {
+        onWall = false;
     }
 
     private void Flip()
@@ -57,4 +77,22 @@ public class PlayerMovementScript : MonoBehaviour
             transform.localScale = localScale;
         }
     }
+
+
+
+    //Check if player is in contact with wall
+    private bool IsWalled(){
+        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
+    }
+
+    private void WallSlide(){
+        if(onWall && !onGround && horizontal != 0f){
+            isWallSliding = true;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+        }
+        else{
+            isWallSliding = false;
+        }
+    }
+
 }
