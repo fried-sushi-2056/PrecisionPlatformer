@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15072e5799cec4d4cb3ef387ba7d6d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformSpeedX: 2
-  platformSpeedY: 2
+  platformSpeedX: 4
+  platformSpeedY: 3
   leftBound: 0
   rightBound: 0
   rb: {fileID: -1886004062997545766}
