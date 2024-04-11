@@ -33,7 +33,7 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private LayerMask groundLayer;
 
-    [SerializeField] private Transform wallCheck;
+    //[SerializeField] private Transform wallCheck;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private bool onWall;
     [SerializeField] private string wallDirection;
