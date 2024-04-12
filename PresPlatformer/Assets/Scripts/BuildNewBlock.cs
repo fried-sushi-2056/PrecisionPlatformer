@@ -11,6 +11,7 @@ public class BuildNewBlock : MonoBehaviour
     public float xPos;
     public float yPos;
     public float disappearTime;
+    public float reappearTime;
     public Quaternion rotation;
 
 
@@ -51,9 +52,9 @@ public class BuildNewBlock : MonoBehaviour
 
     IEnumerator Reappear() //Spawns another block in the place of the old one
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < reappearTime; i++)
         {
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(1f);
         }
         block = Instantiate(blockPrefab, new Vector2(xPos, yPos), rotation);
     }

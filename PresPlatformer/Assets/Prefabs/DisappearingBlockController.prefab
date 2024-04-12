@@ -52,6 +52,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 0
   disappearTime: 0.5
+  reappearTime: 3
   rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!61 &-5407597229830584316
 BoxCollider2D:
