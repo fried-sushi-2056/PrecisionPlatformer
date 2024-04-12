@@ -51,7 +51,7 @@ MonoBehaviour:
   blockTransform: {fileID: 5671890376796300097}
   xPos: 0
   yPos: 0
-  disappearTime: 1
+  disappearTime: 0.5
   rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!61 &-5407597229830584316
 BoxCollider2D:
