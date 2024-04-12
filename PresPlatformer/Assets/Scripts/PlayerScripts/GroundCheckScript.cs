@@ -25,7 +25,7 @@ public class GroundCheckScript : MonoBehaviour
         else if (groundCheck.CompareTag("Disappearing")){
             currentFloorCollider = groundCheck;
             onGround = true;
-            currentFloor.gameObject.GetComponent<DisappearingBlockScript>().StartDisappearing();
+            UpdatePlatformVelocity(groundCheck);
         }
     }
     
