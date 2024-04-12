@@ -56,9 +56,6 @@ public class PlayerMovementScript : MonoBehaviour
 
     void Update()
     {
-
-
-
         if ((rightDirectionPressed && horizontal < capLeftRight) && canRight && !leftDirectionPressed)
         {
             StartCoroutine(SpeedChange(speed, canRight, 1));
