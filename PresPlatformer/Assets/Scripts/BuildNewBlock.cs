@@ -27,7 +27,10 @@ public class BuildNewBlock : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            StartCoroutine(Disappear());
+            if(block != null)
+            {
+                StartCoroutine(Disappear());
+            }
         }
     }
 
