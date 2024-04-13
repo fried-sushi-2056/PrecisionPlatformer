@@ -20,9 +20,8 @@ public class TurretFire : MonoBehaviour
 
     void Fire(){
         var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        bullet.GetComponent<Rigidbody2D>().velocity = bulletSpawnPoint.up * bulletSpeed;
+        bullet.GetComponent<Rigidbody2D>().velocity = new Vector3(1,0,0) * bulletSpeed;
         StartCoroutine(Reload());
-        print(bulletSpawnPoint.up);
     }
 
     IEnumerator Reload(){

@@ -748,6 +748,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 439184436}
+    - target: {fileID: -8731354664771265746, guid: 9052c88126a83dd4e860daa7de99b94a, type: 3}
+      propertyPath: bulletSpeed
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 2316774031330936513, guid: 9052c88126a83dd4e860daa7de99b94a, type: 3}
       propertyPath: m_Name
       value: Turret
