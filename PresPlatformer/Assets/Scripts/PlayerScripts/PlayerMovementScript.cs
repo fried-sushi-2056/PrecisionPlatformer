@@ -9,7 +9,7 @@ public class PlayerMovementScript : MonoBehaviour
     public float checkpointY = 5;
 
 
-    [SerializeField] public bool usingControler = false;
+    [SerializeField] public bool usingController = false;
 
 
     [SerializeField] private float horizontal;
@@ -85,20 +85,20 @@ public class PlayerMovementScript : MonoBehaviour
             StartCoroutine(SpeedChange(airSlow, canFriction, 1));
         }
 
-        if (Input.GetKeyDown("d") || Input.GetKeyDown("right") || (Input.GetAxis("Horizontal") > deadzone && usingControler))
+        if (Input.GetKeyDown("d") || Input.GetKeyDown("right") || (Input.GetAxis("Horizontal") > deadzone && usingController))
         {
             rightDirectionPressed = true;
         }
-        if (Input.GetKeyUp("d") || Input.GetKeyUp("right") || (Input.GetAxis("Horizontal")! > deadzone && usingControler))
+        if (Input.GetKeyUp("d") || Input.GetKeyUp("right") || (Input.GetAxis("Horizontal")! > deadzone && usingController))
         {
             rightDirectionPressed = false;
         }
 
-        if (Input.GetKeyDown("a") || Input.GetKeyDown("left") || (Input.GetAxis("Horizontal") < -1 * deadzone && usingControler))
+        if (Input.GetKeyDown("a") || Input.GetKeyDown("left") || (Input.GetAxis("Horizontal") < -1 * deadzone && usingController))
         {
             leftDirectionPressed = true;
         }
-        if (Input.GetKeyUp("a") || Input.GetKeyUp("left") || (Input.GetAxis("Horizontal")! < -1 * deadzone && usingControler))
+        if (Input.GetKeyUp("a") || Input.GetKeyUp("left") || (Input.GetAxis("Horizontal")! < -1 * deadzone && usingController))
         {
             leftDirectionPressed = false;
         }
