@@ -8,12 +8,13 @@ public class TurretFire : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform player;
     public Transform barrel;
+    public float range = 100;
 
     public float bulletSpeed = 10;
     public bool canShoot = true;
 
     void Update(){
-        if(Mathf.Abs(bulletSpawnPoint.position.x-player.position.x) < 10 && Mathf.Abs(bulletSpawnPoint.position.y-player.position.y) < 10 && canShoot){
+        if(Mathf.Abs(bulletSpawnPoint.position.x-player.position.x) < range && Mathf.Abs(bulletSpawnPoint.position.y-player.position.y) < range && canShoot){
             canShoot = false;
             Fire();
         }
@@ -23,7 +24,6 @@ public class TurretFire : MonoBehaviour
         var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector3(1,0,0) * bulletSpeed;
         barrel.rotation = bulletSpawnPoint.rotation;
-        print(barrel.rotation);
         StartCoroutine(Reload());
     }
 
