@@ -7,6 +7,7 @@ public class TurretFire : MonoBehaviour
     public Transform bulletSpawnPoint;
     public GameObject bulletPrefab;
     public Transform player;
+    public Transform barrel;
 
     public float bulletSpeed = 10;
     public bool canShoot = true;
@@ -21,6 +22,8 @@ public class TurretFire : MonoBehaviour
     void Fire(){
         var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector3(1,0,0) * bulletSpeed;
+        barrel.rotation = bulletSpawnPoint.rotation;
+        print(barrel.rotation);
         StartCoroutine(Reload());
     }
 

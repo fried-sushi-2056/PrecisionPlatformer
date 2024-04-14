@@ -6,8 +6,10 @@ public class ReloadLevel : MonoBehaviour
 {
     public PlayerMovementScript player;
 
-    void OnTriggerEnter2D()
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        player.ReloadCheckpoint();
+        if(collider.CompareTag("Player")){
+            player.ReloadCheckpoint();
+        }
     }
 }

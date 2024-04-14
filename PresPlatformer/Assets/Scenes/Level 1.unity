@@ -353,6 +353,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3187346198564854306, guid: 2e6c48de0f6dbbc42859541586a6a1cc, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 4956509671242954690, guid: 2e6c48de0f6dbbc42859541586a6a1cc, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 5278060587394546362, guid: 2e6c48de0f6dbbc42859541586a6a1cc, type: 3}
       propertyPath: m_Name
       value: Player
@@ -361,6 +369,14 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 439184436}
+    - target: {fileID: 7563641594937338805, guid: 2e6c48de0f6dbbc42859541586a6a1cc, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986195573694880144, guid: 2e6c48de0f6dbbc42859541586a6a1cc, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -752,6 +768,10 @@ PrefabInstance:
       propertyPath: bulletSpeed
       value: -5
       objectReference: {fileID: 0}
+    - target: {fileID: -1937822837731116328, guid: 9052c88126a83dd4e860daa7de99b94a, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 439184436}
     - target: {fileID: 2316774031330936513, guid: 9052c88126a83dd4e860daa7de99b94a, type: 3}
       propertyPath: m_Name
       value: Turret
