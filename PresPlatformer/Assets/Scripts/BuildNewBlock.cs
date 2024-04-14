@@ -44,12 +44,6 @@ public class BuildNewBlock : MonoBehaviour
             yield return new WaitForSeconds(disappearTime/10);
         }
         Destroy(block);
-        BuildIt();
-    }
-
-
-    public void BuildIt()
-    {
         StartCoroutine(Reappear());
     }
 

@@ -7,8 +7,10 @@ public class NextLevelScript : MonoBehaviour
 {
     public GameManager gameManager;
 
-    void OnTriggerEnter2D()
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        gameManager.LoadNextScene();
+        if(collider.CompareTag("Player")){
+            gameManager.LoadNextScene();
+        }
     }
 }

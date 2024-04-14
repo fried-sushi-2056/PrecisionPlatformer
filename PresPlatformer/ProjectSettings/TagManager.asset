@@ -9,6 +9,7 @@ TagManager:
   - Ladder
   - Disappearing
   - Bullet
+  - Check
   layers:
   - Default
   - TransparentFX
