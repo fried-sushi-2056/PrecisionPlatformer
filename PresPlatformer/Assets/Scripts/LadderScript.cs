@@ -30,10 +30,6 @@ public class LadderScript : MonoBehaviour
             playerRb.gravityScale = 0f;
             playerRb.velocity = new Vector2(playerRb.velocity.x, vertical * speed);
         }
-        else
-        {
-            playerRb.gravityScale = 4f;
-        }
     }
 
 
@@ -52,6 +48,10 @@ public class LadderScript : MonoBehaviour
     {
         if (collision.CompareTag("Ladder"))
         {
+            if (isClimbing)
+            {
+                playerRb.gravityScale = 4f;
+            }
             isLadder = false;
             isClimbing = false;
             print("notLaddering");

@@ -9,17 +9,21 @@ public class PlayerMovementScript : MonoBehaviour
     public float checkpointY = 5;
 
 
-    [SerializeField] public bool usingController = false;
+    [SerializeField] public bool usingControler = false;
 
-
+    
     [SerializeField] private float horizontal;
     [SerializeField] private float speed = 0.3f;
     [SerializeField] private float jumpingPower = 20f;
+    [SerializeField] private float doubleJumpingPower = 10f;
     [SerializeField] private float walljumpPower = 20f;
     [SerializeField] private bool isFacingRight = true;
     [SerializeField] private bool onGround;
     [SerializeField] private float airSlow = 0.1f;
     [SerializeField] private float capLeftRight = 9;
+
+    [SerializeField] public int maxDoubleJumps = 1;
+    [SerializeField] public int doubleJumps;
 
     [SerializeField] private float deadzone = 0.2f;
 
@@ -56,6 +60,9 @@ public class PlayerMovementScript : MonoBehaviour
 
     void Update()
     {
+
+
+
         if ((rightDirectionPressed && horizontal < capLeftRight) && canRight && !leftDirectionPressed)
         {
             StartCoroutine(SpeedChange(speed, canRight, 1));
@@ -85,20 +92,20 @@ public class PlayerMovementScript : MonoBehaviour
             StartCoroutine(SpeedChange(airSlow, canFriction, 1));
         }
 
-        if (Input.GetKeyDown("d") || Input.GetKeyDown("right") || (Input.GetAxis("Horizontal") > deadzone && usingController))
+        if (Input.GetKeyDown("d") || Input.GetKeyDown("right") || (Input.GetAxis("Horizontal") > deadzone && usingControler))
         {
             rightDirectionPressed = true;
         }
-        if (Input.GetKeyUp("d") || Input.GetKeyUp("right") || (Input.GetAxis("Horizontal")! > deadzone && usingController))
+        if (Input.GetKeyUp("d") || Input.GetKeyUp("right") || (Input.GetAxis("Horizontal")! > deadzone && usingControler))
         {
             rightDirectionPressed = false;
         }
 
-        if (Input.GetKeyDown("a") || Input.GetKeyDown("left") || (Input.GetAxis("Horizontal") < -1 * deadzone && usingController))
+        if (Input.GetKeyDown("a") || Input.GetKeyDown("left") || (Input.GetAxis("Horizontal") < -1 * deadzone && usingControler))
         {
             leftDirectionPressed = true;
         }
-        if (Input.GetKeyUp("a") || Input.GetKeyUp("left") || (Input.GetAxis("Horizontal")! < -1 * deadzone && usingController))
+        if (Input.GetKeyUp("a") || Input.GetKeyUp("left") || (Input.GetAxis("Horizontal")! < -1 * deadzone && usingControler))
         {
             leftDirectionPressed = false;
         }
@@ -106,6 +113,15 @@ public class PlayerMovementScript : MonoBehaviour
         if (Input.GetButtonDown("Jump") && (onGround || onWall))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+        }
+
+        if (Input.GetButtonDown("Jump") && !onGround && !onWall && doubleJumps > 0)
+        {
+            print(rb.gravityScale);
+            rb.velocity = new Vector2(rb.velocity.x, doubleJumpingPower);
+            doubleJumps += -1;
+            rb.gravityScale = 1;
+            print(rb.gravityScale);
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
@@ -141,7 +157,7 @@ public class PlayerMovementScript : MonoBehaviour
     {
         currentGroundFriction = friction;
     }
-
+    
     IEnumerator SpeedChange(float rightSpeed, bool cooldown, int frameDelay)
     {
         cooldown = false;
@@ -221,6 +237,8 @@ public class PlayerMovementScript : MonoBehaviour
         onGround = true;
         currentGroundSpeedX = x;
         currentGroundSpeedY = y;
+        doubleJumps = maxDoubleJumps;
+        rb.gravityScale = 4f;
     }
 
     public void leaveGround()
