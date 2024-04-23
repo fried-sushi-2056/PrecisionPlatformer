@@ -169,6 +169,11 @@ Transform:
   - {fileID: 1648020036}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &11807626 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5278060587394546362, guid: 2e6c48de0f6dbbc42859541586a6a1cc, type: 3}
+  m_PrefabInstance: {fileID: 655925267}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &167374691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2234,6 +2239,14 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6597442903674735924, guid: 2e6c48de0f6dbbc42859541586a6a1cc, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910059700597923210, guid: 2e6c48de0f6dbbc42859541586a6a1cc, type: 3}
+      propertyPath: constantForce
+      value: 
+      objectReference: {fileID: 655925273}
     - target: {fileID: 6910059700597923210, guid: 2e6c48de0f6dbbc42859541586a6a1cc, type: 3}
       propertyPath: playerTransform
       value: 
@@ -2241,13 +2254,27 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5278060587394546362, guid: 2e6c48de0f6dbbc42859541586a6a1cc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 655925273}
   m_SourcePrefab: {fileID: 100100000, guid: 2e6c48de0f6dbbc42859541586a6a1cc, type: 3}
 --- !u!4 &655925268 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2327236809472615754, guid: 2e6c48de0f6dbbc42859541586a6a1cc, type: 3}
   m_PrefabInstance: {fileID: 655925267}
   m_PrefabAsset: {fileID: 0}
+--- !u!247 &655925273
+ConstantForce2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11807626}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0}
+  m_RelativeForce: {x: 0, y: 0}
+  m_Torque: 0
 --- !u!1 &968333877
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,9 +11,15 @@ public class PlayerMovementScript : MonoBehaviour
 
     [SerializeField] public bool usingControler = false;
 
+    public Vector2 netConstantForce;
+    public float yConstantForce;
+    public float xConstantForce;
+
+    [SerializeField] public float currentGravity = -6;
     
+
     [SerializeField] private float horizontal;
-    [SerializeField] private float speed = 0.3f;
+    [SerializeField] private float speed = 10f;
     [SerializeField] private float jumpingPower = 20f;
     [SerializeField] private float doubleJumpingPower = 10f;
     [SerializeField] private float walljumpPower = 20f;
@@ -22,8 +28,10 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] private float airSlow = 0.1f;
     [SerializeField] private float capLeftRight = 9;
 
+
     [SerializeField] public int maxDoubleJumps = 1;
     [SerializeField] public int doubleJumps;
+    [SerializeField] public float currentJumpForce;
 
     [SerializeField] private float deadzone = 0.2f;
 
@@ -55,14 +63,27 @@ public class PlayerMovementScript : MonoBehaviour
 
     private bool rightDirectionPressed = false;
     private bool leftDirectionPressed = false;
+    private bool jumpPressed = false;
 
-
+    
 
     void Update()
     {
+        yConstantForce = currentGravity;
 
-
-
+        if (rightDirectionPressed && !leftDirectionPressed)
+        {
+            xConstantForce = speed;
+        }
+        else if (leftDirectionPressed && !rightDirectionPressed)
+        {
+            xConstantForce = -speed;
+        }
+        else
+        {
+            xConstantForce = 0;
+        }
+        /*
         if ((rightDirectionPressed && horizontal < capLeftRight) && canRight && !leftDirectionPressed)
         {
             StartCoroutine(SpeedChange(speed, canRight, 1));
@@ -91,7 +112,7 @@ public class PlayerMovementScript : MonoBehaviour
         {
             StartCoroutine(SpeedChange(airSlow, canFriction, 1));
         }
-
+        */
         if (Input.GetKeyDown("d") || Input.GetKeyDown("right") || (Input.GetAxis("Horizontal") > deadzone && usingControler))
         {
             rightDirectionPressed = true;
@@ -110,25 +131,50 @@ public class PlayerMovementScript : MonoBehaviour
             leftDirectionPressed = false;
         }
 
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpPressed = true;
+        }
+
+        if (Input.GetButtonUp("Jump"))
+        {
+            jumpPressed = false;
+        }
+
+        if (Input.GetButtonDown("Jump") && (onGround || onWall))
+        {
+            rb.velocity += new Vector2(0, jumpingPower);
+            currentJumpForce = jumpingPower;
+        }
+
+
+        if (Input.GetButtonDown("Jump") && !onGround && !onWall && doubleJumps > 0)
+        {
+            if (rb.velocity.y < doubleJumpingPower)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, doubleJumpingPower);
+            }
+            currentJumpForce = doubleJumpingPower;
+            doubleJumps += -1;
+        }
+
+        if(Input.GetButtonUp("Jump") && rb.velocity.y > 0f && rb.velocity.y < currentJumpForce/2f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, currentJumpForce/2f);
+        }
+        /*
         if (Input.GetButtonDown("Jump") && (onGround || onWall))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
+        */
 
-        if (Input.GetButtonDown("Jump") && !onGround && !onWall && doubleJumps > 0)
-        {
-            print(rb.gravityScale);
-            rb.velocity = new Vector2(rb.velocity.x, doubleJumpingPower);
-            doubleJumps += -1;
-            rb.gravityScale = 1;
-            print(rb.gravityScale);
-        }
-
+        /*
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
-
+        */
         if (Input.GetButtonDown("Jump") && onWall && !onGround)
         {
             if(wallDirection == "Left")
@@ -150,6 +196,9 @@ public class PlayerMovementScript : MonoBehaviour
 
         Flip();
         //WallSlide();
+
+        netConstantForce = new Vector2(xConstantForce, yConstantForce);
+        gameObject.GetComponent<ConstantForce2D>().force = netConstantForce;
     }
 
 
