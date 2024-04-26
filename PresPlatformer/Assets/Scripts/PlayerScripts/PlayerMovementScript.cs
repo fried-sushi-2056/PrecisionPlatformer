@@ -21,6 +21,7 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] private bool onGround;
     [SerializeField] private float airSlow = 0.1f;
     [SerializeField] private float capLeftRight = 9;
+    [SerializeField] private float floatingSpeed = -5;
 
     [SerializeField] public int maxDoubleJumps = 1;
     [SerializeField] public int doubleJumps;
@@ -32,6 +33,7 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] public float currentGroundFriction = 0;
 
     [SerializeField] public float currentWallFriction;
+    private bool floating = false;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform playerTransform;
@@ -120,7 +122,7 @@ public class PlayerMovementScript : MonoBehaviour
             print(rb.gravityScale);
             rb.velocity = new Vector2(rb.velocity.x, doubleJumpingPower);
             doubleJumps += -1;
-            rb.gravityScale = 1;
+            rb.gravityScale = 2;
             print(rb.gravityScale);
         }
 
@@ -147,6 +149,15 @@ public class PlayerMovementScript : MonoBehaviour
             StartCoroutine(SlowWallSpeed());
         }
 
+        if(Input.GetButtonUp("Jump") || onGround)
+        {
+            floating = false;
+        }
+
+        if(Input.GetButtonDown("Jump") && doubleJumps == 0 && !onGround && !onWall)
+        {
+            floating = true;
+        }
 
         Flip();
         //WallSlide();
@@ -221,7 +232,10 @@ public class PlayerMovementScript : MonoBehaviour
     private void FixedUpdate()
     {
 
-
+        if (floating && rb.velocity.y <= floatingSpeed)
+        {
+            rb.velocity = new Vector2(horizontal + currentGroundSpeedX, currentGroundSpeedY + floatingSpeed);
+        }
         if (onWall && rb.velocity.y < 0)
         {
             rb.velocity = new Vector2(horizontal + currentGroundSpeedX, (rb.velocity.y + currentGroundSpeedY)* currentWallFriction);
