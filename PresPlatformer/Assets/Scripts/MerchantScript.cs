@@ -6,10 +6,9 @@ using TMPro;
 public class MerchantScript : MonoBehaviour
 {
     public GameObject shopUI;
+    [SerializeField] private PlayerMovementScript player;
     private bool shopUIActive = false;
-
-
-
+    
     public void ShowShop(){
         if(!shopUIActive){
         shopUI.SetActive(true);

@@ -308,6 +308,10 @@ public class PlayerMovementScript : MonoBehaviour
         playerTransform.position = new Vector2(checkpointX,checkpointY);
     }
 
+    public void IncreaseSpeed(float increase){
+        speed+= increase;
+    }
+
     /*
     //Check if player is in contact with wall
     private bool IsWalled(){
